@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Service {
+  id                        String   @id @default(uuid())
+  name                      String
+  code                      String?
+  tags                      String?  // Comma-separated or JSON list
+  duration                  String?
+  price                     Float
+  salePrice                 Float?
+  includeTax                Boolean  @default(false)
+  taxPercentage             Float?
+  availableDays             String   @default("[]") // JSON array of days e.g., ["Mon", "Tue"]
+  
+  // Time Based Availability
+  timeAvailabilityEnabled   Boolean  @default(false)
+  startTime                 String?  // e.g. "09:00 AM"
+  endTime                   String?  // e.g. "06:00 PM"
+  
+  // Slot Based Availability
+  slotAvailabilityEnabled   Boolean  @default(false)
+  slots                     String   @default("[]") // JSON list of slots e.g., [{"startTime": "09:00 AM", "endTime": "01:00 PM"}]
+  
+  // Max Bookings
+  maxBookingEnabled         Boolean  @default(false)
+  maxBookings               Int      @default(10)
+  
+  // Reviews
+  reviewsEnabled            Boolean  @default(true)
+  
+  // Content & Visibility
+  description               String?
+  coverImage                String?
+  images                    String   @default("[]") // JSON list of string URLs
+  status                    String   @default("Draft") // Draft, Active, Inactive
+  visibility                Boolean  @default(true)
+  relatedServiceIds         String   @default("[]") // JSON list of service IDs
+
+  // Pro Features (Advanced Options)
+  advancePaymentEnabled     Boolean  @default(false)
+  advanceAmount             Float?
+  
+  addOnsEnabled             Boolean  @default(false)
+  addOns                    String   @default("[]") // JSON list of add-on products/services
+  
+  timeBufferEnabled         Boolean  @default(false)
+  timeBuffer                Int?     // in minutes
+  
+  multipleProvidersEnabled  Boolean  @default(false)
+  providersCount            Int      @default(1)
+  
+  serviceLocationEnabled    Boolean  @default(false)
+  allowedLocations          String?  // JSON list or comma-separated
+  
+  cancellationPolicyEnabled Boolean  @default(false)
+  cancellationCharges       Float?
+  
+  rescheduleEnabled         Boolean  @default(false)
+  
+  minimumBookingNoticeEnabled Boolean @default(false)
+  minimumNoticeHours        Int      @default(24)
+  
+  customInstructionsEnabled Boolean  @default(false)
+  customInstructions        String?
+  
+  subscriptionBookingEnabled Boolean @default(false)
+  subscriptionCycles        String?  // JSON list or comma-separated
+  
+  availabilityOverrideEnabled Boolean @default(false)
+  availabilityOverrides     String   @default("[]") // JSON list of date overrides
+  
+  autoAssignProviderEnabled Boolean  @default(false)
+  
+  customerSupportEnabled    Boolean  @default(false)
+  supportContact            String?
+  
+  taxAndChargesEnabled      Boolean  @default(false)
+  taxRules                  String?  // JSON list or string rules
+  
+  serviceRemindersEnabled   Boolean  @default(false)
+  reminderTemplates         String?  // JSON templates
+  
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+}

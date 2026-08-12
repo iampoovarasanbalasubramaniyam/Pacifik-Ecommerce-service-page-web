@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0F172A;
+  --color-navy-dark: #0B1120;
+  --color-primary: #2B81FB;
+  --color-primary-light: #EFF6FF;
+  --color-primary-hover: #1D6FE8;
+  --color-gold: #FACC15;
+  --color-gold-hover: #EAB308;
+  --color-soft-gray: #F8FAFC;
+  --color-border-gray: #E2E8F0;
+  --color-gray-150: #EAECF0;
+  --color-text-main: #1E293B;
+  --color-text-muted: #64748B;
+  --color-danger: #EF4444;
+  --color-danger-bg: #FEF2F2;
+  --color-success: #10B981;
+  --color-success-bg: #ECFDF5;
+  --color-inactive: #6B7280;
+  --color-inactive-bg: #F3F4F6;
+
+  --font-sans: var(--font-poppins), 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: #F8FAFC;
+    --foreground: #1E293B;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variation-settings: normal;
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+/* Remove arrows/spinners from number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
